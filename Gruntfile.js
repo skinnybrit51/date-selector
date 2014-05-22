@@ -4,8 +4,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('./package.json'),
         watchify: {
             dist: {
-                src: './lib/app.js',
-                dest: './public/app.js'
+                src: './lib/datepicker.js',
+                dest: './public/datepicker.js'
             }
         },
         connect: {
@@ -52,7 +52,7 @@ module.exports = function (grunt) {
         less: {
             development: {
                 files: {
-                    'public/app.css': 'style/app.less'
+                    'public/datepicker.css': 'style/datepicker.less'
                 }
             },
             production: {
@@ -60,17 +60,17 @@ module.exports = function (grunt) {
                     compact: true
                 },
                 files: {
-                    './dist/app.min.css': 'style/app.less'
+                    './dist/datepicker.min.css': 'style/datepicker.less'
                 }
             }
         },
         browserify: {
             dist: {
-                dest: './dist/app.js',
-                src: ['./lib/app.js'],
+                dest: './dist/datepicker.js',
+                src: ['./lib/datepicker.js'],
                 options: {
                     bundleOptions: {
-                        standalone: 'App'       // global variable name
+                        standalone: 'BootyDatePicker'       // global variable name
                     }
                 }
             }
@@ -82,7 +82,7 @@ module.exports = function (grunt) {
             },
             production: {
                 files: {
-                    './dist/app.min.js': ['./dist/app.js']
+                    './dist/datepicker.min.js': ['./dist/datepicker.js']
                 }
             }
         },

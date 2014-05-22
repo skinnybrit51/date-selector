@@ -1,0 +1,76 @@
+@color_table_header_row: #ecf5ec;
+@color_font_light: gray;
+
+.booty-datepicker {
+
+  width: 250px;
+
+  th {
+    background-color: @color_table_header_row;
+  }
+
+  th, td {
+    text-align: center;
+  }
+
+  .not-current-month {
+    color: @color_font_light;
+  }
+
+  td:hover:not(.not-current-month) {
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .today {
+    color: white;
+    background-color: lightslategrey;
+    font-weight: bold;
+  }
+
+  .control-bar {
+    margin-bottom: 10px;
+    font-weight: bold;
+
+    button {
+      width: 25px;
+      height: 25px;
+    }
+
+    .previous-buttons {
+      float: left;
+      width: 75px;
+
+      button:last-child {
+        margin-left: 5px;
+
+        span {
+          margin-left: -2px;
+        }
+      }
+    }
+
+    .next-buttons {
+      float: right;
+      width: 75px;
+
+      button {
+        float: right;
+
+        &:last-child {
+          margin-right: 5px;
+          span {
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+
+    .center-text {
+      margin: 0 auto;
+      width: 150px;
+      text-align: center;
+    }
+  }
+
+}

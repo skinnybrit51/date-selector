@@ -16,17 +16,29 @@ describe('Control Bar View', function () {
 
     it('Should have the correct markup', function () {
 
-        expect(this.controlBarView.markup).to.equal('<div>' +
-            '<button id="booty-datepicker-prev-year" class="btn btn-primary btn-xs">' +
-            '&#60;&#60;</button>' +   // previous year
-            '<button id="booty-datepicker-prev-month" class="btn btn-primary btn-xs">' +
-            '&#60;</button>' +       // previous month
-            '<span>2014-Jun</span>' +       // current display year and month
-            '<button id="booty-datepicker-next-month" class="btn btn-primary btn-xs">' +
-            '&#62;</button>' +      // next month
-            '<button id="booty-datepicker-next-year" class="btn btn-primary btn-xs">' +
-            '&#62;&#62;</button>' + // next year
-            '</div>');
+        var markup = '<div class="control-bar">' +
+            '<div class="previous-buttons">' +
+            '<button type="button" id="booty-datepicker-prev-year" ' +
+            'class="btn btn-primary btn-xs">' +
+            '<span class="glyphicon glyphicon-fast-backward"></span></button>' +
+            '<button type="button" id="booty-datepicker-prev-month" ' +
+            'class="btn btn-primary btn-xs">' +
+            '<span class="glyphicon glyphicon-backward"></span></button>' +
+            '</div>' +
+            '<div class="next-buttons">' +
+            '<button type="button" id="booty-datepicker-next-year" ' +
+            'class="btn btn-primary btn-xs">' +
+            '<span class="glyphicon glyphicon-fast-forward"></span></button>' +
+            '<button type="button" id="booty-datepicker-next-month" ' +
+            'class="btn btn-primary btn-xs">' +
+            '<span class="glyphicon glyphicon-forward"></span></button>' +
+            '</div>' +
+            '<div class="center-text">' +
+            '<span>' + moment().year(2014).month(5).date(1).format('YYYY-MMM') + '</span>' +
+            '</div>' +
+            '</div>';
+
+        expect(this.controlBarView.markup).to.equal(markup);
     });
 
 });
