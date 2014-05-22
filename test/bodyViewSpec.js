@@ -24,7 +24,7 @@ describe('Body View', function () {
                 '<tr>' +
                 '<td class="not-current-month" data-datepicker-date="2014-03-30">30</td>' +
                 '<td class="not-current-month" data-datepicker-date="2014-03-31">31</td>' +
-                '<td class="" data-datepicker-date="2014-04-01">1</td>' +
+                '<td class="selected-day" data-datepicker-date="2014-04-01">1</td>' +
                 '<td class="" data-datepicker-date="2014-04-02">2</td>' +
                 '<td class="" data-datepicker-date="2014-04-03">3</td>' +
                 '<td class="" data-datepicker-date="2014-04-04">4</td>' +

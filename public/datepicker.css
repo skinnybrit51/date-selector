@@ -1,57 +1,79 @@
-.booty-datepicker {
-  width: 250px;
+[data-toggle='booty-datepicker'] {
+  cursor: pointer;
 }
-.booty-datepicker th {
+[data-toggle='booty-datepicker']:hover .glyphicon-calendar {
+  font-weight: bold;
+}
+#booty-datepicker {
+  margin-top: 5px;
+  position: absolute;
+  width: 250px;
+  border: #ccc 1px solid;
+  padding: 10px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 8px 1px #cccccc;
+  -moz-box-shadow: 0px 0px 8px 1px #cccccc;
+  box-shadow: 0px 0px 8px 1px #cccccc;
+}
+#booty-datepicker table {
+  margin-bottom: 0px;
+}
+#booty-datepicker th {
   background-color: #ecf5ec;
 }
-.booty-datepicker th,
-.booty-datepicker td {
+#booty-datepicker th,
+#booty-datepicker td {
   text-align: center;
 }
-.booty-datepicker .not-current-month {
+#booty-datepicker .selected-day {
+  font-weight: bold;
+}
+#booty-datepicker .not-current-month {
   color: #808080;
 }
-.booty-datepicker td:hover:not(.not-current-month) {
+#booty-datepicker td:hover:not(.not-current-month) {
   cursor: pointer;
   font-weight: bold;
 }
-.booty-datepicker .today {
+#booty-datepicker .today {
   color: white;
   background-color: lightslategrey;
   font-weight: bold;
 }
-.booty-datepicker .control-bar {
+#booty-datepicker .control-bar {
   margin-bottom: 10px;
   font-weight: bold;
 }
-.booty-datepicker .control-bar button {
+#booty-datepicker .control-bar button {
   width: 25px;
   height: 25px;
 }
-.booty-datepicker .control-bar .previous-buttons {
+#booty-datepicker .control-bar .previous-buttons {
   float: left;
   width: 75px;
 }
-.booty-datepicker .control-bar .previous-buttons button:last-child {
+#booty-datepicker .control-bar .previous-buttons button:last-child {
   margin-left: 5px;
 }
-.booty-datepicker .control-bar .previous-buttons button:last-child span {
+#booty-datepicker .control-bar .previous-buttons button:last-child span {
   margin-left: -2px;
 }
-.booty-datepicker .control-bar .next-buttons {
+#booty-datepicker .control-bar .next-buttons {
   float: right;
   width: 75px;
 }
-.booty-datepicker .control-bar .next-buttons button {
+#booty-datepicker .control-bar .next-buttons button {
   float: right;
 }
-.booty-datepicker .control-bar .next-buttons button:last-child {
+#booty-datepicker .control-bar .next-buttons button:last-child {
   margin-right: 5px;
 }
-.booty-datepicker .control-bar .next-buttons button:last-child span {
+#booty-datepicker .control-bar .next-buttons button:last-child span {
   margin-left: 2px;
 }
-.booty-datepicker .control-bar .center-text {
+#booty-datepicker .control-bar .center-text {
   margin: 0 auto;
   width: 150px;
   text-align: center;

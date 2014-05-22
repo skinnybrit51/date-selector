@@ -19,7 +19,7 @@ describe('DatePicker View', function () {
     });
 
     it('Should have the table markup', function () {
-        expect(this.datePickerView.el.is('.booty-datepicker')).to.be.true;
+        expect(this.datePickerView.el.is('#booty-datepicker')).to.be.true;
         expect(this.datePickerView.el.html()).to.contain('table');
     });
 

@@ -3,7 +3,8 @@ var moment = require('moment');
 
 module.exports = function (thisMoment) {
 
-    var now = parseInt(moment().format('YYYYMMDD'), 10),
+    var thisNow = parseInt(thisMoment.format('YYYYMMDD'), 10),
+        now = parseInt(moment().format('YYYYMMDD'), 10),
         previousMoment = thisMoment.clone().subtract('months', 1),
         nextMoment = thisMoment.clone().add('months', 1);
 
@@ -43,9 +44,10 @@ module.exports = function (thisMoment) {
         for (var d = 1; d <= 7; d++) {
 
             var aMoment = days.pop(),
-                classes = [];
+                classes = [],
+                aNow = parseInt(aMoment.format('YYYYMMDD'), 10);
 
-            if (parseInt(aMoment.format('YYYYMMDD')) === now) {
+            if (aNow === now) {
                 // today
                 classes.push('today');
             }
@@ -53,6 +55,10 @@ module.exports = function (thisMoment) {
             if (aMoment.month() !== thisMoment.month()) {
                 // current month
                 classes.push('not-current-month');
+            }
+
+            if (aNow == thisNow) {
+                classes.push('selected-day');
             }
 
             markup += '<td class="' + classes.join(' ') + '" data-datepicker-date="' +
@@ -107,7 +113,7 @@ var $ = require('jquery'),
 
 module.exports = function (thisMoment) {
 
-    var el = $('<div class="booty-datepicker"></div>');
+    var el = $('<div id="booty-datepicker"></div>');
 
     var refreshView = function () {
         el.empty();
@@ -182,8 +188,37 @@ var $ = require('jquery'),
 
 $(function () {
 
-    var datePickerView = new DatePickerView(moment());
-    $('.container').append(datePickerView.el);
+    var $body = $(document.body);
+
+    $body.on('click', '[data-toggle="booty-datepicker"]', function (e) {
+
+        if (!$body.find('#booty-datepicker').length) {
+            var input = $(this).prev(),
+                inputGroup = input.closest('.input-group');
+
+            if (input.is('input')) {
+                var thisMoment = (moment(input.val()));
+                if (!thisMoment.isValid()) {
+                    thisMoment = moment(); // just set today
+                }
+
+                var datePickerView = new DatePickerView(thisMoment);
+                datePickerView.el.on('click', function (e) {
+                    e.stopPropagation();
+                });
+                datePickerView.el.css('right', inputGroup.offset().left);
+                datePickerView.el.css('top', inputGroup.offset().top + inputGroup.height());
+                $body.append(datePickerView.el);
+
+
+            }
+        }
+        e.stopPropagation();
+    });
+
+    $(document).on('click', ':not(#booty-datepicker)', function (e) {
+        $('#booty-datepicker').remove();
+    });
 
 });
 
