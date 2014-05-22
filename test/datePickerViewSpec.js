@@ -18,6 +18,10 @@ describe('DatePicker View', function () {
         delete this.datePickerView;
     });
 
+    it('Should have the table markup', function () {
+        expect(this.datePickerView.el.html()).to.contain('table');
+    });
+
     it('Should make the current month one less', function () {
         expect(this.datePickerView.el.html()).to.contain('2014-Jun');
 
