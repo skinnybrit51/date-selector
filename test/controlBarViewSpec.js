@@ -17,11 +17,15 @@ describe('Control Bar View', function () {
     it('Should have the correct markup', function () {
 
         expect(this.controlBarView.markup).to.equal('<div>' +
-            '<button id="booty-datepicker-prev-year">&#60;&#60;</button>' +   // previous year
-            '<button id="booty-datepicker-prev-month">&#60;</button>' +       // previous month
+            '<button id="booty-datepicker-prev-year" class="btn btn-primary btn-xs">' +
+            '&#60;&#60;</button>' +   // previous year
+            '<button id="booty-datepicker-prev-month" class="btn btn-primary btn-xs">' +
+            '&#60;</button>' +       // previous month
             '<span>2014-Jun</span>' +       // current display year and month
-            '<button id="booty-datepicker-next-month">&#62;</button>' +      // next month
-            '<button id="booty-datepicker-next-year">&#62;&#62;</button>' + // next year
+            '<button id="booty-datepicker-next-month" class="btn btn-primary btn-xs">' +
+            '&#62;</button>' +      // next month
+            '<button id="booty-datepicker-next-year" class="btn btn-primary btn-xs">' +
+            '&#62;&#62;</button>' + // next year
             '</div>');
     });
 
