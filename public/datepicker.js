@@ -2,7 +2,7 @@
 var moment = require('moment');
 
 module.exports = function (thisMoment) {
-
+    
     var thisNow = parseInt(thisMoment.format('YYYYMMDD'), 10),
         now = parseInt(moment().format('YYYYMMDD'), 10),
         previousMoment = thisMoment.clone().subtract('months', 1),
@@ -10,7 +10,7 @@ module.exports = function (thisMoment) {
 
     var daysInCurrentMonth = thisMoment.daysInMonth(),
         daysInPreviousMonth = previousMoment.daysInMonth(),
-        startDay = thisMoment.day(),
+        startDay = thisMoment.clone().date(1).day(),
         i = 0;
 
     var days = [];
@@ -57,7 +57,7 @@ module.exports = function (thisMoment) {
                 classes.push('not-current-month');
             }
 
-            if (aNow == thisNow) {
+            if (aNow === thisNow) {
                 classes.push('selected-day');
             }
 
@@ -188,7 +188,7 @@ var $ = require('jquery'),
 
 $(function () {
 
-    var $body = $(document.body);
+    var $body = $(window.document.body);
 
     $body.on('click', '[data-toggle="booty-datepicker"]', function (e) {
 
@@ -216,7 +216,7 @@ $(function () {
         e.stopPropagation();
     });
 
-    $(document).on('click', ':not(#booty-datepicker)', function (e) {
+    $(window.document).on('click', ':not(#booty-datepicker)', function () {
         $('#booty-datepicker').remove();
     });
 

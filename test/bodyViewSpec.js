@@ -16,7 +16,7 @@ describe('Body View', function () {
 
     it('Should create all the days for the 2014-Apr', function () {
 
-        var thisMoment = moment().year(2014).month(3).date(1);
+        var thisMoment = moment().year(2014).month(3).date(5);
 
         var markup = bodyView(thisMoment).markup;  // month is Apr - zero indexed
 
@@ -24,11 +24,11 @@ describe('Body View', function () {
                 '<tr>' +
                 '<td class="not-current-month" data-datepicker-date="2014-03-30">30</td>' +
                 '<td class="not-current-month" data-datepicker-date="2014-03-31">31</td>' +
-                '<td class="selected-day" data-datepicker-date="2014-04-01">1</td>' +
+                '<td class="" data-datepicker-date="2014-04-01">1</td>' +
                 '<td class="" data-datepicker-date="2014-04-02">2</td>' +
                 '<td class="" data-datepicker-date="2014-04-03">3</td>' +
                 '<td class="" data-datepicker-date="2014-04-04">4</td>' +
-                '<td class="" data-datepicker-date="2014-04-05">5</td>' +
+                '<td class="selected-day" data-datepicker-date="2014-04-05">5</td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td class="" data-datepicker-date="2014-04-06">6</td>' +
