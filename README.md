@@ -21,7 +21,7 @@ Datepicker based on Twitter Bootstrap styling.
 ````
 
 #### How it works
-The datepicker listens for click events off the data-toggle attribute.
+The datepicker listens for click events off the <code>data-toggle</code> attribute.
 
 
 #### Demo
