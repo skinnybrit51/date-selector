@@ -112,6 +112,5 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint2']);
 
     // production build
-    grunt.registerTask('production', ['browserify', 'uglify:production',
-        'less:production', 'clean']);
+    grunt.registerTask('production', ['watchify', 'less:development']);
 };
