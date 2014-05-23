@@ -8,17 +8,38 @@ var $ = require('jquery'),
 describe('Body View', function () {
 
     it('Should display today class', function () {
-        var now = moment();
-        var markup = bodyView(now).markup;
-        var cell = $(markup).find('td[data-datepicker-date="' + now.format('YYYY-MM-DD') + '"]');
+        var today = moment(),
+            selectedMonth = moment();
+        var markup = bodyView(selectedMonth).markup;
+        var cell = $(markup).find('td[data-datepicker-date="' + today.format('YYYY-MM-DD') + '"]');
         expect(cell.is('.today')).to.be.true;
+    });
+
+    it('Should display the selected day class', function () {
+
+        var selectedMonth = moment().year(2014).month(4),
+            selectedDate = moment().year(2014).month(4).date(3);
+
+        var markup = bodyView(selectedMonth, selectedDate).markup;
+        var cell = $(markup).find('td[data-datepicker-date="' +
+            selectedDate.format('YYYY-MM-DD') + '"]');
+
+        expect(cell.is('.selected-day')).to.be.true;
+
+        selectedMonth = moment().year(2014).month(5);
+
+        markup = bodyView(selectedMonth, selectedDate).markup;
+        cell = $(markup).find('td[data-datepicker-date="' +
+            selectedDate.format('YYYY-MM-DD') + '"]');
+        expect(cell.is('.selected-day')).to.be.false;
+
     });
 
     it('Should create all the days for the 2014-Apr', function () {
 
-        var thisMoment = moment().year(2014).month(3).date(5);
+        var selectedMonth = moment().year(2014).month(3);
 
-        var markup = bodyView(thisMoment).markup;  // month is Apr - zero indexed
+        var markup = bodyView(selectedMonth).markup;  // month is Apr - zero indexed
 
         expect(markup).to.equal('<tbody>' +
                 '<tr>' +
@@ -28,7 +49,7 @@ describe('Body View', function () {
                 '<td class="" data-datepicker-date="2014-04-02">2</td>' +
                 '<td class="" data-datepicker-date="2014-04-03">3</td>' +
                 '<td class="" data-datepicker-date="2014-04-04">4</td>' +
-                '<td class="selected-day" data-datepicker-date="2014-04-05">5</td>' +
+                '<td class="" data-datepicker-date="2014-04-05">5</td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td class="" data-datepicker-date="2014-04-06">6</td>' +

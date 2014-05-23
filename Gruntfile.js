@@ -40,7 +40,8 @@ module.exports = function (grunt) {
                     beforeEach: true,
                     afterEach: true,
                     global: true,
-                    window: true
+                    window: true,
+                    document: true
                 }
             },
             all: ['index.js', 'Gruntfile.js', 'test/**/*.js', 'lib/**/*.js']

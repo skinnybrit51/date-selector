@@ -8,9 +8,9 @@ describe('Control Bar View', function () {
 
     beforeEach(function () {
 
-        var thisMoment = moment().year(2014).month(5).date(1);
+        var selectedMonth = moment().year(2014).month(5);
 
-        this.controlBarView = controlBarView(thisMoment);     // month is Jun - zero indexed
+        this.controlBarView = controlBarView(selectedMonth);     // month is Jun - zero indexed
 
     });
 
@@ -34,7 +34,7 @@ describe('Control Bar View', function () {
             '<span class="glyphicon glyphicon-forward"></span></button>' +
             '</div>' +
             '<div class="center-text">' +
-            '<span>' + moment().year(2014).month(5).date(1).format('YYYY-MMM') + '</span>' +
+            '<span>' + moment().year(2014).month(5).format('YYYY-MMM') + '</span>' +
             '</div>' +
             '</div>';
 

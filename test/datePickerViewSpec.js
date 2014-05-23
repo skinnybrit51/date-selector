@@ -8,9 +8,9 @@ describe('DatePicker View', function () {
 
     beforeEach(function () {
 
-        var thisMoment = moment().year(2014).month(5).date(1);  // june - zero indexed
+        var selectedDate = moment().year(2014).month(5).date(1);  // june - zero indexed
 
-        this.datePickerView = new DatePickerView(thisMoment);
+        this.datePickerView = new DatePickerView(selectedDate);
 
     });
 
@@ -85,5 +85,4 @@ describe('DatePicker View', function () {
         expect(this.datePickerView.el.html()).to.contain('2016-Jun');
 
     });
-
 });

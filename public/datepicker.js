@@ -1,16 +1,23 @@
 ;(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var moment = require('moment');
 
-module.exports = function (thisMoment) {
+module.exports = function (selectedMonth, selectedDate) {
 
-    var thisNow = parseInt(thisMoment.format('YYYYMMDD'), 10),
-        now = parseInt(moment().format('YYYYMMDD'), 10),
-        previousMoment = thisMoment.clone().subtract('months', 1),
-        nextMoment = thisMoment.clone().add('months', 1);
+    // set the selected month to the first day of the month
+    selectedMonth.date(1);
 
-    var daysInCurrentMonth = thisMoment.daysInMonth(),
+    var selectedDateNow = null;
+    if (selectedDate != null) {
+        selectedDateNow = parseInt(selectedDate.format('YYYYMMDD'), 10);
+    }
+
+    var now = parseInt(moment().format('YYYYMMDD'), 10),
+        previousMoment = selectedMonth.clone().subtract('months', 1),
+        nextMoment = selectedMonth.clone().add('months', 1);
+
+    var daysInCurrentMonth = selectedMonth.daysInMonth(),
         daysInPreviousMonth = previousMoment.daysInMonth(),
-        startDay = thisMoment.clone().date(1).day(),
+        startDay = selectedMonth.day(),
         i = 0;
 
     var days = [];
@@ -21,7 +28,7 @@ module.exports = function (thisMoment) {
 
     // insert current month days into days array
     for (i = 1; i <= daysInCurrentMonth; i++) {
-        days.push(thisMoment.clone().date(i));
+        days.push(selectedMonth.clone().date(i));
     }
 
     // calculate the remaining days to add to day array
@@ -52,12 +59,12 @@ module.exports = function (thisMoment) {
                 classes.push('today');
             }
 
-            if (aMoment.month() !== thisMoment.month()) {
+            if (aMoment.month() !== selectedMonth.month()) {
                 // current month
                 classes.push('not-current-month');
             }
 
-            if (aNow === thisNow) {
+            if (selectedDateNow && (aNow === selectedDateNow)) {
                 classes.push('selected-day');
             }
 
@@ -80,7 +87,7 @@ module.exports = function (thisMoment) {
 
 };
 },{"moment":9}],2:[function(require,module,exports){
-module.exports = function (thisMoment) {
+module.exports = function (selectedMonth) {
 
     var markup = '<div class="control-bar">' +
         '<div class="previous-buttons">' +
@@ -96,7 +103,7 @@ module.exports = function (thisMoment) {
         '<span class="glyphicon glyphicon-forward"></span></button>' +
         '</div>' +
         '<div class="center-text">' +
-        '<span>' + thisMoment.format('YYYY-MMM') + '</span>' +
+        '<span>' + selectedMonth.format('YYYY-MMM') + '</span>' +
         '</div>' +
         '</div>';
 
@@ -111,14 +118,16 @@ var $ = require('jquery'),
     tableView = require('./tableView');
 
 
-module.exports = function (thisMoment) {
+module.exports = function (selectedDate, input) {
 
     var el = $('<div id="booty-datepicker"></div>');
 
+    var selectedMonth = selectedDate.clone().date(1);
+
     var refreshView = function () {
         el.empty();
-        el.append(controlBarView(thisMoment).markup);
-        el.append(tableView(thisMoment).markup);
+        el.append(controlBarView(selectedMonth).markup);
+        el.append(tableView(selectedMonth, selectedDate).markup);
     };
 
     refreshView();
@@ -126,19 +135,19 @@ module.exports = function (thisMoment) {
     var api = {
         el: el,
         incrementYear: function () {
-            thisMoment.add('years', 1);
+            selectedMonth.add('years', 1);
             refreshView();
         },
         incrementMonth: function () {
-            thisMoment.add('months', 1);
+            selectedMonth.add('months', 1);
             refreshView();
         },
         decrementYear: function () {
-            thisMoment.subtract('years', 1);
+            selectedMonth.subtract('years', 1);
             refreshView();
         },
         decrementMonth: function () {
-            thisMoment.subtract('months', 1);
+            selectedMonth.subtract('months', 1);
             refreshView();
         }
     };
@@ -160,6 +169,12 @@ module.exports = function (thisMoment) {
         api.incrementYear();
     });
 
+    el.on('click', 'td:not(.not-current-month)', function () {
+        var cell = $(this);
+        var date = cell.attr('data-datepicker-date');
+        input.val(date);
+        cell.trigger('booty-datepicker-close');
+    });
 
     return api;
 
@@ -188,36 +203,55 @@ var $ = require('jquery'),
 
 $(function () {
 
-    var $body = $(window.document.body);
+    var $body = $(window.document.body),
+        datePickerView = null;
 
+    var close = function () {
+        if (datePickerView != null) {
+            datePickerView.el.remove();
+            datePickerView = null;
+        }
+    };
+
+    var open = function (input) {
+        var inputGroup = input.closest('.input-group');
+
+        if (input.is('input')) {
+            var selectedDate = (moment(input.val()));
+            if (!selectedDate.isValid()) {
+                selectedDate = moment(); // just set today
+            }
+
+            datePickerView = new DatePickerView(selectedDate, input);
+            datePickerView.el.on('click', function (e) {
+                e.stopPropagation();
+            });
+            datePickerView.el.on('booty-datepicker-close', function () {
+                close();
+            });
+            datePickerView.el.css('right', inputGroup.offset().left);
+            datePickerView.el.css('top', inputGroup.offset().top + inputGroup.height());
+            $body.append(datePickerView.el);
+        }
+    };
+
+    var isOpen = function () {
+        return $body.find('#booty-datepicker').length;
+    };
+
+    // global listeners
     $body.on('click', '[data-toggle="booty-datepicker"]', function (e) {
 
-        if (!$body.find('#booty-datepicker').length) {
-            var input = $(this).prev(),
-                inputGroup = input.closest('.input-group');
-
-            if (input.is('input')) {
-                var thisMoment = (moment(input.val()));
-                if (!thisMoment.isValid()) {
-                    thisMoment = moment(); // just set today
-                }
-
-                var datePickerView = new DatePickerView(thisMoment);
-                datePickerView.el.on('click', function (e) {
-                    e.stopPropagation();
-                });
-                datePickerView.el.css('right', inputGroup.offset().left);
-                datePickerView.el.css('top', inputGroup.offset().top + inputGroup.height());
-                $body.append(datePickerView.el);
-            }
+        if (!isOpen()) {
+            open($(this).prev());
         } else {
-            $('#booty-datepicker').remove();
+            close();
         }
         e.stopPropagation();
     });
 
     $(window.document).on('click', ':not(#booty-datepicker)', function () {
-        $('#booty-datepicker').remove();
+        close();
     });
 
 });
@@ -250,7 +284,7 @@ module.exports = function () {
 var headerView = require('./headerView'),
     bodyView = require('./bodyView');
 
-module.exports = function (thisMoment) {
+module.exports = function (selectedMonth, selectedDate) {
 
     // opening tag
     var markup = '<table class="table table-bordered">';
@@ -259,7 +293,7 @@ module.exports = function (thisMoment) {
     markup += headerView().markup;
 
     // body
-    markup += bodyView(thisMoment).markup;
+    markup += bodyView(selectedMonth, selectedDate).markup;
 
     // closing tag
     markup += '</table>';
