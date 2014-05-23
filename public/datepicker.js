@@ -2,7 +2,7 @@
 var moment = require('moment');
 
 module.exports = function (thisMoment) {
-    
+
     var thisNow = parseInt(thisMoment.format('YYYYMMDD'), 10),
         now = parseInt(moment().format('YYYYMMDD'), 10),
         previousMoment = thisMoment.clone().subtract('months', 1),
@@ -209,9 +209,9 @@ $(function () {
                 datePickerView.el.css('right', inputGroup.offset().left);
                 datePickerView.el.css('top', inputGroup.offset().top + inputGroup.height());
                 $body.append(datePickerView.el);
-
-
             }
+        } else {
+            $('#booty-datepicker').remove();
         }
         e.stopPropagation();
     });
