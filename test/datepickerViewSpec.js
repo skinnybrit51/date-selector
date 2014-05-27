@@ -1,16 +1,25 @@
 require('./loader');
 
-var moment = require('moment'),
+var $ = require('jquery'),
+    moment = require('moment'),
     expect = require('chai').expect,
     DatePickerView = require('datepickerView');
 
-describe('DatePicker View', function () {
+describe('Datepicker View', function () {
 
     beforeEach(function () {
-
-        var selectedDate = moment().year(2014).month(5).date(1);  // june - zero indexed
-
-        this.datePickerView = new DatePickerView(selectedDate);
+        this.options = {
+            // june - zero indexed
+            selectedDate: moment().year(2014).month(5).date(1),
+            input: $('<input/>'),
+            formatter: function (value) {
+                return value;
+            },
+            validator: function () {
+                return true;
+            }
+        };
+        this.datePickerView = new DatePickerView(this.options);
 
     });
 
@@ -21,6 +30,12 @@ describe('DatePicker View', function () {
     it('Should have the table markup', function () {
         expect(this.datePickerView.el.is('#booty-datepicker')).to.be.true;
         expect(this.datePickerView.el.html()).to.contain('table');
+    });
+
+    it('Should set the date when a date is selected', function () {
+        expect(this.options.input.val()).to.equal('');
+        this.datePickerView.el.find('td[data-datepicker-date="2014-06-15"]').trigger('click');
+        expect(this.options.input.val()).to.equal('2014-06-15');
     });
 
     it('Should make the current month one less', function () {
@@ -85,4 +100,5 @@ describe('DatePicker View', function () {
         expect(this.datePickerView.el.html()).to.contain('2016-Jun');
 
     });
-});
+})
+;

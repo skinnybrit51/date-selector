@@ -1,7 +1,7 @@
 require('./loader');
-require('datepicker');
 
-var moment = require('moment'),
+var datepicker = require('datepicker'),
+    moment = require('moment'),
     $ = require('jquery'),
     expect = require('chai').expect;
 
@@ -9,6 +9,8 @@ describe('Date Picker', function () {
 
     beforeEach(function () {
         $(document.body).empty();
+        $('body').empty();
+        $(window.document.body).empty();
         this.inputGroup = $('<div class="input-group">' +
             '<input type="text" class="form-control" placeholder="yyyy-mm-dd">' +
             '<span class="input-group-addon" data-toggle="booty-datepicker">' +
@@ -16,24 +18,30 @@ describe('Date Picker', function () {
             '</div>');
         this.input = this.inputGroup.find('input');
         this.launcher = this.inputGroup.find('.input-group-addon');
+
         $(document.body).append(this.inputGroup);
 
+        $(function () {
+            datepicker();
+        });
     });
 
     it('Should open the calendar', function () {
         expect($('body').find('#booty-datepicker').length).to.equal(0);
         this.launcher.trigger('click');
         expect($('body').find('#booty-datepicker').length).to.equal(1);
+
     });
 
     it('Should close the picker', function () {
-        // clicking on launcher again
+
+        // clicking outside of picker
         this.launcher.trigger('click');
         expect($('body').find('#booty-datepicker').length).to.equal(1);
         $(document.body).trigger('click');
         expect($('body').find('#booty-datepicker').length).to.equal(0);
 
-        // clicking outside of picker
+        // clicking on launcher again
         this.launcher.trigger('click');
         expect($('body').find('#booty-datepicker').length).to.equal(1);
         this.launcher.trigger('click');
@@ -52,6 +60,17 @@ describe('Date Picker', function () {
         this.launcher.trigger('click');
         $('body').find('td[data-datepicker-date="' + date + '"]').trigger('click');
         expect(this.input.val()).to.equal(date);
+    });
+
+    it('Should format a date', function () {
+        datepicker({formatter: function (value) {
+            return moment(value).format('DD MMM YYYY');
+        }});
+
+        var date = moment().format('YYYY-MM-DD');
+        this.launcher.trigger('click');
+        $('body').find('td[data-datepicker-date="' + date + '"]').trigger('click');
+        expect(this.input.val()).to.equal(moment(date).format('DD MMM YYYY'));
     });
 
     it('Should set the selected date in the picker from the input', function () {

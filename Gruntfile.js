@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('./package.json'),
         watchify: {
             dist: {
-                src: './lib/datepicker.js',
+                src: './lib/demoLoader.js',
                 dest: './public/datepicker.js'
             }
         },
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                 src: ['./lib/datepicker.js'],
                 options: {
                     bundleOptions: {
-                        standalone: 'BootyDatePicker'       // global variable name
+                        standalone: 'BootyDatepicker'       // global variable name
                     }
                 }
             }
