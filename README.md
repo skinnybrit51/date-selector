@@ -9,8 +9,10 @@ Datepicker based on Twitter Bootstrap styling.
 * Selects the input date value and displays the selected day with a yellowish background.
 * Ability to scroll through months and years.
 
-#### Markup
+#### Installation
+<code>npm install booty-datepicker --save</code>
 
+#### Markup
 ````
 <div class="input-group">
     <input type="text" class="form-control" placeholder="yyyy-mm-dd">
@@ -18,6 +20,11 @@ Datepicker based on Twitter Bootstrap styling.
         <span class="glyphicon glyphicon-calendar"></span>
     </span>
 </div>
+````
+
+#### Initializing JavaScript
+````
+require('booty-datepicker');
 ````
 
 #### How it works

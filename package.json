@@ -1,7 +1,7 @@
 {
     "name": "booty-datepicker",
     "description": "Date picker based on twitter bootstrap styles.",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.js",
     "keywords": ["bootstrap", "twitter boostrap", "datepicker", "date picker"],
     "repository": {

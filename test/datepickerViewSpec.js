@@ -2,7 +2,7 @@ require('./loader');
 
 var moment = require('moment'),
     expect = require('chai').expect,
-    DatePickerView = require('datePickerView');
+    DatePickerView = require('datepickerView');
 
 describe('DatePicker View', function () {
 
