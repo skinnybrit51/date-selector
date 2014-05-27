@@ -3,6 +3,11 @@ booty-datepicker
 
 Datepicker based on Twitter Bootstrap styling.
 
+#### Dependencies
+* jquery
+* underscore
+* moment
+
 #### Functionality
 * Selects the current month if no input date value is present.
 * The current day is highlighted by a gray background.
@@ -25,17 +30,22 @@ Datepicker based on Twitter Bootstrap styling.
 
 #### Initializing JavaScript
 ````
-var datepicker = require('booty-datepicker');
-datepicker({
-    formatter: function (value /*string(YYYY-MM-DD)*/) {
-        return value;
-    },
-    validate: function (value /*string*/) {
-        return true;
-    },
-    parser: function (value /*string*/) {
-        return value;
-    }
+var $ = require('jquery'),
+    datepicker = require('booty-datepicker');
+
+$(function() {
+    // requires the document to be loaded
+    datepicker({
+        formatter: function (value /*string(YYYY-MM-DD)*/) {
+            return value;
+        },
+        validate: function (value /*string*/) {
+            return true;
+        },
+        parser: function (value /*string*/) {
+            return value;
+        }
+    });
 });
 ````
 
