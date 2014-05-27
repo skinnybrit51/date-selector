@@ -3,11 +3,13 @@ require('./loader');
 var datepicker = require('datepicker'),
     moment = require('moment'),
     $ = require('jquery'),
-    expect = require('chai').expect;
+    expect = require('chai').expect,
+    sinon = require('sinon');
 
 describe('Date Picker', function () {
 
     beforeEach(function () {
+        this.sandbox = sinon.sandbox.create();
         $(document.body).empty();
         $('body').empty();
         $(window.document.body).empty();
@@ -24,6 +26,10 @@ describe('Date Picker', function () {
         $(function () {
             datepicker();
         });
+    });
+
+    afterEach(function () {
+        this.sandbox.restore();
     });
 
     it('Should open the calendar', function () {
@@ -79,7 +85,37 @@ describe('Date Picker', function () {
         this.launcher.trigger('click');
         var cell = $('body').find('td[data-datepicker-date="' + date + '"]');
         expect(cell.is('.selected-day')).to.be.true;
-
     });
 
+    it('Should validate the date from the input', function () {
+
+        var date = 'asdasdasd';
+        this.input.val(date);
+
+        // date not valid so should use now
+        this.launcher.trigger('click');
+        var cell = $('body').find('td[data-datepicker-date="' + date + '"]');
+        expect(cell.is('.selected-day')).to.be.false;
+        this.launcher.trigger('click');
+
+        // valid date
+        date = '2014-01-15';
+        this.input.val(date);
+        this.launcher.trigger('click');
+        cell = $('body').find('td[data-datepicker-date="' + date + '"]');
+        expect(cell.is('.selected-day')).to.be.true;
+        this.launcher.trigger('click');
+    });
+
+    it('Should call the parser', function () {
+        var parser = this.sandbox.spy();
+        datepicker({parser: parser});
+        expect(parser.callCount).to.equal(0);
+
+        this.input.val('2014-05-15');
+        this.launcher.trigger('click');
+        expect(parser.callCount).to.equal(1);
+        expect(parser.args[0][0]).to.equal('2014-05-15');
+
+    });
 });
