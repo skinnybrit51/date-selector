@@ -25,7 +25,18 @@ Datepicker based on Twitter Bootstrap styling.
 
 #### Initializing JavaScript
 ````
-require('booty-datepicker');
+var datepicker = require('booty-datepicker');
+datepicker({
+    formatter: function (value /*string(YYYY-MM-DD)*/) {
+        return value;
+    },
+    validate: function (value /*string*/) {
+        return true;
+    },
+    parser: function (value /*string*/) {
+        return value;
+    }
+});
 ````
 
 #### How it works
