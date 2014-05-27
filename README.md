@@ -10,7 +10,8 @@ Datepicker based on Twitter Bootstrap styling.
 * Ability to scroll through months and years.
 
 #### Installation
-<code>npm install booty-datepicker --save</code>
+* <code>npm install booty-datepicker --save</code>
+* copy style/datepicker.less to local style directory
 
 #### Markup
 ````
