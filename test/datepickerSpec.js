@@ -1,14 +1,13 @@
 require('./loader');
+require('datepicker');
 
 var moment = require('moment'),
     $ = require('jquery'),
-    datepicker = require('datepicker'),
     expect = require('chai').expect;
 
 describe('Date Picker', function () {
 
     beforeEach(function () {
-        datepicker.foo = 5;     // removing this line will create a lint error
         $(document.body).empty();
         this.inputGroup = $('<div class="input-group">' +
             '<input type="text" class="form-control" placeholder="yyyy-mm-dd">' +
