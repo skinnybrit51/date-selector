@@ -3,11 +3,13 @@ require('./loader');
 var $ = require('jquery'),
     moment = require('moment'),
     expect = require('chai').expect,
-    DatePickerView = require('datepickerView');
+    DatePickerView = require('datepickerView'),
+    sinon = require('sinon');
 
 describe('Datepicker View', function () {
 
     beforeEach(function () {
+        this.sandbox = sinon.sandbox.create();
         this.options = {
             // june - zero indexed
             selectedDate: moment().year(2014).month(5).date(1),
@@ -25,6 +27,7 @@ describe('Datepicker View', function () {
 
     afterEach(function () {
         delete this.datePickerView;
+        this.sandbox.restore();
     });
 
     it('Should have the table markup', function () {
@@ -34,7 +37,10 @@ describe('Datepicker View', function () {
 
     it('Should set the date when a date is selected', function () {
         expect(this.options.input.val()).to.equal('');
+        var spy = this.sandbox.spy();
+        this.options.input.on('blur', spy);
         this.datePickerView.el.find('td[data-datepicker-date="2014-06-15"]').trigger('click');
+        expect(spy.callCount).to.equal(1);
         expect(this.options.input.val()).to.equal('2014-06-15');
     });
 
