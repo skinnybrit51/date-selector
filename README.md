@@ -1,6 +1,8 @@
 booty-datepicker
 ================
 
+[![Build Status](https://travis-ci.org/skinnybrit51/booty-datepicker.svg?branch=master)](https://travis-ci.org/skinnybrit51/booty-datepicker)
+
 Datepicker based on Twitter Bootstrap styling.
 
 #### Dependencies
