@@ -2,6 +2,7 @@ booty-datepicker
 ================
 
 [![Build Status](https://travis-ci.org/skinnybrit51/booty-datepicker.svg?branch=master)](https://travis-ci.org/skinnybrit51/booty-datepicker)
+[![NPM version](https://badge.fury.io/js/booty-datepicker.svg)](http://badge.fury.io/js/booty-datepicker)
 
 Datepicker based on Twitter Bootstrap styling.
 
