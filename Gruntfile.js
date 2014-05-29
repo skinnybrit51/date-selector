@@ -2,8 +2,26 @@ module.exports = function (grunt) {
     'use strict';
     grunt.initConfig({
         pkg: grunt.file.readJSON('./package.json'),
-        watchify: {
+        browserify: {
             dist: {
+                dest: './dist/datepicker.js',
+                src: ['./lib/datepicker.js'],
+                options: {
+                    bundleOptions: {
+                        standalone: 'BootyDatepicker'       // global variable name
+                    }
+                }
+            },
+            local: {
+                src: './lib/demoLoader.js',
+                dest: './public/datepicker.js',
+                options: {
+                    bundleOptions: {
+                        debug: true //sourcemaps
+                    }
+                }
+            },
+            prod: {
                 src: './lib/demoLoader.js',
                 dest: './public/datepicker.js'
             }
@@ -47,8 +65,15 @@ module.exports = function (grunt) {
             all: ['index.js', 'Gruntfile.js', 'test/**/*.js', 'lib/**/*.js']
         },
         watch: {
-            files: './style/**/*.less',
-            tasks: ['less']
+            less: {
+                files: './style/**/*.less',
+                tasks: ['less']
+            },
+            app: {
+                files: './lib/**/*',
+                tasks: ['']
+            }
+
         },
         less: {
             development: {
@@ -62,17 +87,6 @@ module.exports = function (grunt) {
                 },
                 files: {
                     './dist/datepicker.min.css': 'style/datepicker.less'
-                }
-            }
-        },
-        browserify: {
-            dist: {
-                dest: './dist/datepicker.js',
-                src: ['./lib/datepicker.js'],
-                options: {
-                    bundleOptions: {
-                        standalone: 'BootyDatepicker'       // global variable name
-                    }
                 }
             }
         },
@@ -96,14 +110,13 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-jshint2');
     grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-watchify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // run development server for debugging
-    grunt.registerTask('default', ['watchify', 'less:development', 'connect', 'watch']);
+    grunt.registerTask('default', ['browserify:local', 'less:development', 'connect', 'watch']);
 
     // run unit tests
     grunt.registerTask('test', ['simplemocha']);
@@ -112,5 +125,5 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint2']);
 
     // production build
-    grunt.registerTask('production', ['watchify', 'less:development']);
+    grunt.registerTask('production', ['browserify:prod', 'less:development']);
 };
