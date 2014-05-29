@@ -58,6 +58,12 @@ describe('Date Picker', function () {
         expect($('body').find('#booty-datepicker').length).to.equal(1);
         $('body').find('td:not(.not-current-month)').trigger('click');
         expect($('body').find('#booty-datepicker').length).to.equal(0);
+
+        // hitting the escape key
+        this.launcher.trigger('click');
+        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        $(document).trigger($.Event('keyup', { keyCode: 27 }));
+        expect($('body').find('#booty-datepicker').length).to.equal(0);
     });
 
     it('Should set the input date once a date is selected', function () {
