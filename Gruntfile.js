@@ -71,7 +71,7 @@ module.exports = function (grunt) {
             },
             app: {
                 files: './lib/**/*',
-                tasks: ['']
+                tasks: ['browserify:local']
             }
 
         },
