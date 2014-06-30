@@ -6,11 +6,6 @@ booty-datepicker
 
 Datepicker based on Twitter Bootstrap styling.
 
-#### Dependencies
-* jquery
-* underscore
-* moment
-
 #### Functionality
 * Selects the current month if no input date value is present.
 * The current day is highlighted by a gray background.
@@ -19,7 +14,13 @@ Datepicker based on Twitter Bootstrap styling.
 
 #### Installation
 * <code>npm install booty-datepicker --save</code>
-* copy style/datepicker.less to local style directory
+* Make sure you load bootstraps css and font files before referencing datepicker less file. 
+* Reference datepicker.less file in your own less file.
+
+Example page.less
+````
+@import '../node_modules/booty-datepicker/less/datepicker';
+````
 
 #### Markup
 ````
