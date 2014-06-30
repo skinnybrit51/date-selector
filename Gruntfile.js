@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         },
         watch: {
             less: {
-                files: './style/**/*.less',
+                files: './less/**/*.less',
                 tasks: ['less']
             },
             app: {
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
         less: {
             development: {
                 files: {
-                    'public/datepicker.css': 'style/datepicker.less'
+                    'public/datepicker.css': 'less/datepicker.less'
                 }
             },
             production: {
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
                     compact: true
                 },
                 files: {
-                    './dist/datepicker.min.css': 'style/datepicker.less'
+                    './dist/datepicker.min.css': 'less/datepicker.less'
                 }
             }
         },
