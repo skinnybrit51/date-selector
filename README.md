@@ -4,7 +4,11 @@ booty-datepicker
 [![Build Status](https://travis-ci.org/skinnybrit51/booty-datepicker.svg?branch=master)](https://travis-ci.org/skinnybrit51/booty-datepicker)
 [![NPM version](https://badge.fury.io/js/booty-datepicker.svg)](http://badge.fury.io/js/booty-datepicker)
 
-Datepicker based on Twitter Bootstrap styling.
+
+#### Description
+Date picker based off bootstrap styles.
+
+![](http://skinnybrit51.com/images/booty-datepicker.png)
 
 #### Functionality
 * Selects the current month if no input date value is present.
