@@ -6,6 +6,9 @@ booty-datepicker
 
 
 #### Description
+
+##### [View Demo with Implementation Code](http://skinnybrit51.com/booty-datepicker "Demo")
+
 Date picker based off bootstrap styles.
 
 ![](http://skinnybrit51.com/images/booty-datepicker.png)
@@ -59,7 +62,3 @@ $(function() {
 
 #### How it works
 The datepicker listens for click events off the <code>data-toggle</code> attribute.
-
-
-#### Demo
-Visit http://skinnybrit51.com/booty-datepicker
