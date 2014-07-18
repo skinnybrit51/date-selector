@@ -39,26 +39,36 @@ Example page.less
 </div>
 ````
 
-#### Initializing JavaScript
+#### JavaScript
 ````
 var $ = require('jquery'),
+    moment = require('moment'),
     datepicker = require('booty-datepicker');
 
 $(function() {
-    // requires the document to be loaded
-    datepicker({
-        formatter: function (value /*string(YYYY-MM-DD)*/) {
-            return value;
+    // datepicker requires the document to be loaded
+       
+    // default options already internally set
+    var defaultOptions = {
+        RAW_FORMAT: 'YYYY-MM-DD',
+        INPUT_FORMATS: ['MM/DD/YYYY'],
+        DISPLAY_FORMAT: 'MM/DD/YYYY',
+        formatter: function (value) {
+            return moment(value, this.RAW_FORMAT).format(this.DISPLAY_FORMAT);
         },
-        validate: function (value /*string*/) {
-            return true;
+        validate: function (value) {
+            return moment(value, this.INPUT_FORMATS).isValid();
         },
-        parser: function (value /*string*/) {
-            return value;
+        parser: function (value) {
+            return moment(value, this.INPUT_FORMATS).format(this.RAW_FORMAT);
         }
-    });
+    };
+    datepicker(defaultOptions);
 });
 ````
 
 #### How it works
-The datepicker listens for click events off the <code>data-toggle</code> attribute.
+* The datepicker listens for click events off the <code>data-toggle</code> attribute.
+* If the none of the <code>INPUT_FORMATS</code> are met then when the datepicker is opened, today date is selected instead.
+* For form validation separate listeners need to be used.
+* To get the value, just use <code>input.val()</code>.  You will need to use your own validator and parser against this value.

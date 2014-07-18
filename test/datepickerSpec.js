@@ -67,11 +67,12 @@ describe('Date Picker', function () {
     });
 
     it('Should set the input date once a date is selected', function () {
-        var date = moment().format('YYYY-MM-DD');
+        var aMoment = moment();
         expect(this.input.val()).to.equal('');
         this.launcher.trigger('click');
-        $('body').find('td[data-datepicker-date="' + date + '"]').trigger('click');
-        expect(this.input.val()).to.equal(date);
+        $('body').find('td[data-datepicker-date="' + aMoment.format('YYYY-MM-DD') + '"]')
+            .trigger('click');
+        expect(this.input.val()).to.equal(aMoment.format('MM/DD/YYYY'));
     });
 
     it('Should format a date', function () {
@@ -105,17 +106,19 @@ describe('Date Picker', function () {
         this.launcher.trigger('click');
 
         // valid date
-        date = '2014-01-15';
-        this.input.val(date);
+        var aMoment = moment('2014-01-15');
+        this.input.val(aMoment.format('MM/DD/YYYY'));
         this.launcher.trigger('click');
-        cell = $('body').find('td[data-datepicker-date="' + date + '"]');
+        cell = $('body').find('td[data-datepicker-date="' + aMoment.format('YYYY-MM-DD') + '"]');
         expect(cell.is('.selected-day')).to.be.true;
         this.launcher.trigger('click');
     });
 
     it('Should call the parser', function () {
         var parser = this.sandbox.spy();
-        datepicker({parser: parser});
+        datepicker({parser: parser, validate: function () {
+            return true;
+        }});
         expect(parser.callCount).to.equal(0);
 
         this.input.val('2014-05-15');

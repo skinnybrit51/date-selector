@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <title>booty-datepicker</title>
+<meta name="author" content="skinnybrit51">
+<meta name="description" content="Booty-datepicker demo page.">
+<meta name="keywords" content="JavaScript, HTML, Bootstrap, Date, Datepicker, Picker">
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-52801256-1', 'auto');
     ga('send', 'pageview');
@@ -31,30 +41,37 @@
 
 <div class="container">
 
-    <h1>booty-datepicker</h1>
+    <h1>booty-datepicker demo</h1>
 
     <form role="form" class="form-horizontal">
 
         <div class="form-group">
             <div class="col-md-4">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="yyyy-mm-dd"/>
+                    <input type="text" class="form-control"
+                           placeholder="Valid format - MM/DD/YYYY"/>
 
                     <span class="input-group-addon" data-toggle="booty-datepicker">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
+            <div class="col-md-4">
+                <p class="form-control-static">
+                    <--- click calendar icon to open datepicker
+                </p>
+            </div>
         </div>
 
     </form>
 
+    <h4>Markup</h4>
     <pre>
         &lt;form role="form" class="form-horizontal"&gt;
             &lt;div class="form-group"&gt;
                 &lt;div class="col-md-4"&gt;
                     &lt;div class="input-group"&gt;
-                        &lt;input type="text" class="form-control" placeholder="yyyy-mm-dd"/&gt;
+                        &lt;input type="text" class="form-control" placeholder="Valid format - MM/DD/YYYY"/&gt;
                         &lt;span class="input-group-addon" data-toggle="booty-datepicker"&gt;
                             &lt;span class="glyphicon glyphicon-calendar"&gt;&lt;/span&gt;
                         &lt;/span&gt;
@@ -62,6 +79,32 @@
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/form&gt;
+    </pre>
+    <h4>JavaScript</h4>
+    <pre>
+var $ = require('jquery'),
+    moment = require('moment'),
+    datepicker = require('booty-datepicker');
+
+$(function () {
+
+    // default options already internally set
+    var defaultOptions = {
+        RAW_FORMAT: 'YYYY-MM-DD',
+        INPUT_FORMATS: ['MM/DD/YYYY'],
+        DISPLAY_FORMAT: 'MM/DD/YYYY',
+        formatter: function (value) {
+            return moment(value, this.RAW_FORMAT).format(this.DISPLAY_FORMAT);
+        },
+        validate: function (value) {
+            return moment(value, this.INPUT_FORMATS).isValid();
+        },
+        parser: function (value) {
+            return moment(value, this.INPUT_FORMATS).format(this.RAW_FORMAT);
+        }
+    };
+    datepicker(defaultOptions);
+});
     </pre>
 
 </div>
