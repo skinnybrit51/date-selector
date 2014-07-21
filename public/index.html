@@ -94,13 +94,13 @@ $(function () {
         INPUT_FORMATS: ['MM/DD/YYYY'],
         DISPLAY_FORMAT: 'MM/DD/YYYY',
         formatter: function (value) {
-            return moment(value, this.RAW_FORMAT).format(this.DISPLAY_FORMAT);
+            return moment(value, this.RAW_FORMAT, true).format(this.DISPLAY_FORMAT);
         },
         validate: function (value) {
-            return moment(value, this.INPUT_FORMATS).isValid();
+            return moment(value, this.INPUT_FORMATS, true).isValid();
         },
         parser: function (value) {
-            return moment(value, this.INPUT_FORMATS).format(this.RAW_FORMAT);
+            return moment(value, this.INPUT_FORMATS, true).format(this.RAW_FORMAT);
         }
     };
     datepicker(defaultOptions);
