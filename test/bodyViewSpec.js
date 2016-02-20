@@ -1,9 +1,9 @@
 require('./loader');
 
-var $ = require('jquery'),
-    moment = require('moment'),
+var moment = require('moment'),
     expect = require('chai').expect,
-    bodyView = require('bodyView');
+    bodyView = require('bodyView'),
+    $ = require('jquery');
 
 describe('Body View', function () {
 
