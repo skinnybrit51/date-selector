@@ -14,9 +14,9 @@
     "url": "https://github.com/skinnybrit51/date-selector"
   },
   "dependencies": {
-    "underscore": "1.6.0",
+    "jquery": "^2.2.0",
     "moment": "2.7.0",
-    "jquery": "2.2.0"
+    "underscore": "1.6.0"
   },
   "devDependencies": {
     "chai": "1.9.0",
@@ -31,7 +31,7 @@
     "grunt-jshint2": "2.4.4",
     "grunt-remove": "0.1.0",
     "grunt-simple-mocha": "0.4.0",
-    "jsdom": "0.8.10",
+    "jsdom": "^8.0.4",
     "mocha": "1.18.0",
     "sinon": "1.9.0"
   },
