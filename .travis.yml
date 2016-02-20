@@ -5,7 +5,7 @@ before_deploy: grunt production
 deploy:
   provider: s3
   bucket: skinnybrit51.com
-  upload-dir: booty-datepicker
+  upload-dir: date-selector
   skip_cleanup: true
   secret_access_key:
     secure: bhvLDYKOdk476ENAHSUiE2gOxP/V9beKoiAep6AZaTnNvd7443pkw8JMjdpFmPq9OZ9mh9Q3uywVoOYjKZz02wPNAQFU7qSyxQc1NhIiTo9J0wHmRT5XlUNoaO4AI5geVmyD0ma/c5GwyloTHXX6ENZYcJTdnKEfevXLbVyDeWE=

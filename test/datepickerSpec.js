@@ -15,7 +15,7 @@ describe('Date Picker', function () {
         $(window.document.body).empty();
         this.inputGroup = $('<div class="input-group">' +
             '<input type="text" class="form-control" placeholder="yyyy-mm-dd">' +
-            '<span class="input-group-addon" data-toggle="booty-datepicker">' +
+            '<span class="input-group-addon" data-toggle="date-selector">' +
             '<span class="glyphicon glyphicon-calendar"></span></span>' +
             '</div>');
         this.input = this.inputGroup.find('input');
@@ -33,9 +33,9 @@ describe('Date Picker', function () {
     });
 
     it('Should open the calendar', function () {
-        expect($('body').find('#booty-datepicker').length).to.equal(0);
+        expect($('body').find('#date-selector').length).to.equal(0);
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        expect($('body').find('#date-selector').length).to.equal(1);
 
     });
 
@@ -43,27 +43,27 @@ describe('Date Picker', function () {
 
         // clicking outside of picker
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        expect($('body').find('#date-selector').length).to.equal(1);
         $(document.body).trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(0);
+        expect($('body').find('#date-selector').length).to.equal(0);
 
         // clicking on launcher again
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        expect($('body').find('#date-selector').length).to.equal(1);
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(0);
+        expect($('body').find('#date-selector').length).to.equal(0);
 
         // clicking on a date
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        expect($('body').find('#date-selector').length).to.equal(1);
         $('body').find('td:not(.not-current-month)').trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(0);
+        expect($('body').find('#date-selector').length).to.equal(0);
 
         // hitting the escape key
         this.launcher.trigger('click');
-        expect($('body').find('#booty-datepicker').length).to.equal(1);
+        expect($('body').find('#date-selector').length).to.equal(1);
         $(document).trigger($.Event('keyup', { keyCode: 27 }));
-        expect($('body').find('#booty-datepicker').length).to.equal(0);
+        expect($('body').find('#date-selector').length).to.equal(0);
     });
 
     it('Should set the input date once a date is selected', function () {

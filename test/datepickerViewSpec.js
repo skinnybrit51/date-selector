@@ -31,7 +31,7 @@ describe('Datepicker View', function () {
     });
 
     it('Should have the table markup', function () {
-        expect(this.datePickerView.el.is('#booty-datepicker')).to.be.true;
+        expect(this.datePickerView.el.is('#date-selector')).to.be.true;
         expect(this.datePickerView.el.html()).to.contain('table');
     });
 
@@ -47,7 +47,7 @@ describe('Datepicker View', function () {
     it('Should make the current month one less', function () {
         expect(this.datePickerView.el.html()).to.contain('2014-Jun');
 
-        var prevMonthButton = this.datePickerView.el.find('#booty-datepicker-prev-month');
+        var prevMonthButton = this.datePickerView.el.find('#date-selector-prev-month');
         prevMonthButton.trigger('click');
 
         expect(this.datePickerView.el.html()).to.contain('2014-May');
@@ -64,7 +64,7 @@ describe('Datepicker View', function () {
     it('Should make the current month one more', function () {
         expect(this.datePickerView.el.html()).to.contain('2014-Jun');
 
-        var nextMonthButton = this.datePickerView.el.find('#booty-datepicker-next-month');
+        var nextMonthButton = this.datePickerView.el.find('#date-selector-next-month');
         nextMonthButton.trigger('click');
 
         expect(this.datePickerView.el.html()).to.contain('2014-Jul');
@@ -82,7 +82,7 @@ describe('Datepicker View', function () {
     it('Should make the current year one less', function () {
         expect(this.datePickerView.el.html()).to.contain('2014-Jun');
 
-        var prevYearButton = this.datePickerView.el.find('#booty-datepicker-prev-year');
+        var prevYearButton = this.datePickerView.el.find('#date-selector-prev-year');
         prevYearButton.trigger('click');
 
         expect(this.datePickerView.el.html()).to.contain('2013-Jun');
@@ -96,7 +96,7 @@ describe('Datepicker View', function () {
     it('Should make the current year one more', function () {
         expect(this.datePickerView.el.html()).to.contain('2014-Jun');
 
-        var nextYearButton = this.datePickerView.el.find('#booty-datepicker-next-year');
+        var nextYearButton = this.datePickerView.el.find('#date-selector-next-year');
         nextYearButton.trigger('click');
 
         expect(this.datePickerView.el.html()).to.contain('2015-Jun');

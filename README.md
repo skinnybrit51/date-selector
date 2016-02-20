@@ -1,17 +1,17 @@
-booty-datepicker
+date-selector
 ================
 
-[![Build Status](https://travis-ci.org/skinnybrit51/booty-datepicker.svg?branch=master)](https://travis-ci.org/skinnybrit51/booty-datepicker)
-[![NPM version](https://badge.fury.io/js/booty-datepicker.svg)](http://badge.fury.io/js/booty-datepicker)
+[![Build Status](https://travis-ci.org/skinnybrit51/date-selector.svg?branch=master)](https://travis-ci.org/skinnybrit51/date-selector)
+[![NPM version](https://badge.fury.io/js/date-selector.svg)](http://badge.fury.io/js/date-selector)
 
 
 #### Description
 
-##### [View Demo with Implementation Code](http://skinnybrit51.com/booty-datepicker "Demo")
+##### [View Demo with Implementation Code](http://skinnybrit51.com/date-selector "Demo")
 
 Date picker based off bootstrap styles.
 
-![](http://skinnybrit51.com/images/booty-datepicker.png)
+![](http://skinnybrit51.com/images/date-selector.png)
 
 #### Functionality
 * Selects the current month if no input date value is present.
@@ -20,20 +20,20 @@ Date picker based off bootstrap styles.
 * Ability to scroll through months and years.
 
 #### Installation
-* <code>npm install booty-datepicker --save</code>
-* Make sure you load bootstraps css and font files before referencing datepicker less file. 
+* <code>npm install date-selector --save</code>
+* Make sure you load bootstraps css and font files before referencing datepicker less file.
 * Reference datepicker.less file in your own less file.
 
 Example page.less
 ````
-@import '../node_modules/booty-datepicker/less/datepicker';
+@import '../node_modules/date-selector/less/datepicker';
 ````
 
 #### Markup
 ````
 <div class="input-group">
     <input type="text" class="form-control" placeholder="yyyy-mm-dd">
-    <span class="input-group-addon" data-toggle="booty-datepicker">     
+    <span class="input-group-addon" data-toggle="date-selector">     
         <span class="glyphicon glyphicon-calendar"></span>
     </span>
 </div>
@@ -43,11 +43,11 @@ Example page.less
 ````
 var $ = require('jquery'),
     moment = require('moment'),
-    datepicker = require('booty-datepicker');
+    datepicker = require('date-selector');
 
 $(function() {
     // datepicker requires the document to be loaded
-       
+
     // default options already internally set
     var defaultOptions = {
         RAW_FORMAT: 'YYYY-MM-DD',

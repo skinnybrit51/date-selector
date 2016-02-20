@@ -8,7 +8,7 @@ module.exports = function (grunt) {
                 src: ['./lib/datepicker.js'],
                 options: {
                     bundleOptions: {
-                        standalone: 'BootyDatepicker'       // global variable name
+                        standalone: 'DateSelector'       // global variable name
                     }
                 }
             },
