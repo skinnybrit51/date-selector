@@ -1,7 +1,7 @@
 {
   "name": "date-selector",
   "description": "Date picker based off bootstrap styles.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "index.js",
   "keywords": [
     "bootstrap",
