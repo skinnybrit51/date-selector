@@ -1,0 +1,35 @@
+{
+    "maxErrors" : -1,
+    "preset": "airbnb",
+    "disallowSpacesInFunctionDeclaration": null,
+    "disallowSpacesInNamedFunctionExpression" : null,
+    "requireSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInNamedFunctionExpression": {
+        "beforeOpeningRoundBrace": true,
+        "beforeOpeningCurlyBrace": true
+    },
+    "disallowSpaceAfterObjectKeys": null,
+    "requireSpaceAfterObjectKeys": true,
+    "safeContextKeyword" : "that",
+    "validateIndentation" : 4,
+    "requirePaddingNewLinesAfterBlocks" : null,
+    "requireBlocksOnNewline" : null,
+    "disallowQuotedKeysInObjects" : null,
+    "disallowMultipleVarDecl" : null,
+    "requireTrailingComma": null,
+    "disallowTrailingComma": true,
+    "maximumLineLength": 120,
+    "requireDollarBeforejQueryAssignment": null,
+    "validateLineBreaks": null
+}

@@ -1,14 +1,15 @@
 require('./loader');
 
 var expect = require('chai').expect,
-    headerView = require('headerView');
 
+    headerView = require('headerView'),
+    defaultOptions = require('options');
 
 describe('Header View', function () {
 
     it('Should create thead with the label week day as titles', function () {
 
-        var markup = headerView().markup;
+        var markup = headerView(defaultOptions).markup;
 
         expect(markup).to.equal('<thead>' +
             '<tr>' +
@@ -21,7 +22,6 @@ describe('Header View', function () {
             '<th>S</th>' +
             '</tr>' +
             '</thead>');
-
 
     });
 

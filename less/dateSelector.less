@@ -1,0 +1,207 @@
+@import "./theme";
+
+#date-selector {
+
+    @font-face {
+        font-family: 'Date Selector Icon Fonts';
+        src: url('@{icon-font-path}dateSelectorIconFonts.eot');
+        src: url('@{icon-font-path}dateSelectorIconFonts.eot?piox5x#iefix') format('embedded-opentype'),
+        url('@{icon-font-path}dateSelectorIconFonts.ttf?piox5x') format('truetype'),
+        url('@{icon-font-path}dateSelectorIconFonts.woff?piox5x') format('woff'),
+        url('@{icon-font-path}dateSelectorIconFonts.svg?piox5x#icomoon') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    color: @color_text;
+    font-family: @font_family;
+    font-size: @font_size;
+    line-height: @line-height;
+    z-index: 1050;
+    background-color: @color_background;
+
+    margin-top: 5px;
+    position: absolute;
+    width: 380px;
+    padding: 10px;
+
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+
+    -webkit-box-shadow: 0 0 8px 1px @color_table_border;
+    -moz-box-shadow: 0 0 8px 1px @color_table_border;
+    box-shadow: 0 0 8px 1px @color_table_border;
+
+    table {
+        display: table;
+        background-color: transparent;
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 0;
+
+        border: 2px solid @color_table_border;
+        border-collapse: collapse;
+        border-spacing: 0;
+
+        -webkit-box-shadow: 1px 1px 1px @color_table_border;
+        -moz-box-shadow: 1px 1px 1px @color_table_border;
+        box-shadow: 1px 1px 1px @color_table_border;
+    }
+
+    th, td {
+        text-align: center;
+        border: 1px solid darken(@color_table_border, 5%);
+        padding: 8px;
+    }
+
+    th {
+        vertical-align: bottom;
+        border-bottom-width: 2px;
+        border-top: 0;
+        background-color: @color_table_header;
+    }
+
+    td {
+        vertical-align: top;
+
+        .makeSelected() {
+            font-weight: bold;
+            background-color: @color_table_select;
+        }
+
+        &:hover:not(.not-current-month) {
+            .makeSelected();
+            cursor: pointer;
+        }
+
+        &.selected-day {
+            .makeSelected();
+        }
+
+        &.not-current-month {
+            color: lighten(@color_text, 55%);;
+        }
+
+        &.today {
+            color: @color_background;
+            background-color: darken(@color_table_border, 30%);
+            font-weight: bold;
+        }
+    }
+
+    .navigation-bar {
+        margin-bottom: 10px;
+        font-weight: bold;
+
+        .month-text {
+            margin: 0 auto;
+            width: 150px;
+            text-align: center;
+            font-size: large;
+        }
+
+        .previous-buttons, .next-buttons {
+
+            .group-buttons {
+                position: relative;
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+            button {
+                width: 25px;
+                height: 25px;
+                background-color: @color_table_buttons;
+                color: @color_background;
+                padding: 1px 5px;
+                font-size: 14px;
+                line-height: 1.5;
+                display: inline-block;
+                margin-bottom: 0;
+                font-weight: 400;
+                text-align: center;
+                vertical-align: middle;
+                cursor: pointer;
+                border: 1px solid transparent;
+                white-space: nowrap;
+                border-radius: 4px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            [class^="icon-"], [class*=" icon-"] {
+                position: relative;
+                top: 1px;
+                display: inline-block;
+                font-style: normal;
+                font-weight: bold;
+                /* use !important to prevent issues with browser extensions that change fonts */
+                font-family: 'Date Selector Icon Fonts' !important;
+                speak: none;
+                font-variant: normal;
+                text-transform: none;
+                line-height: 1;
+
+                /* Better Font Rendering =========== */
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .icon-today:before {
+                content: "\e94d";
+            }
+            .icon-next-year:before {
+                content: "\ea22";
+            }
+            .icon-previous-year:before {
+                content: "\ea21";
+            }
+            .icon-next-month {
+                left: 1px;
+            }
+            .icon-next-month:before {
+                content: "\ea20";
+            }
+            .icon-previous-month {
+                left: -2px;
+            }
+            .icon-previous-month:before {
+                content: "\ea1f";
+            }
+
+        }
+
+        .previous-buttons {
+            float: left;
+            width: 75px;
+
+            .group-buttons {
+                button:first-child {
+                    margin-right: 5px;
+                }
+            }
+        }
+
+        .next-buttons {
+            float: right;
+            width: 100px;
+
+            .group-buttons {
+                float: right;
+
+                button {
+                    &:first-child, &:nth-child(2) {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

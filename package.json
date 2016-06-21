@@ -1,11 +1,10 @@
 {
   "name": "date-selector",
-  "description": "Date picker based off bootstrap styles.",
-  "version": "2.0.1",
+  "description": "Date picker.",
+  "version": "3.0.0",
   "main": "index.js",
   "keywords": [
     "bootstrap",
-    "twitter boostrap",
     "datepicker",
     "date picker"
   ],
@@ -14,28 +13,36 @@
     "url": "https://github.com/skinnybrit51/date-selector"
   },
   "dependencies": {
-    "jquery": "^2.2.0",
-    "moment": "2.7.0",
-    "underscore": "1.6.0"
+    "jquery": "2.2.0",
+    "moment": "2.13.0",
+    "lodash": "4.13.1",
+    "handlebars": "4.0.5"
   },
   "devDependencies": {
-    "chai": "1.9.0",
+    "browserify-handlebars": "1.0.0",
+    "chai": "3.5.0",
+    "chai-string": "1.2.0",
     "grunt": "0.4.2",
+    "grunt-banner": "^0.6.0",
     "grunt-browserify": "2.1.0",
     "grunt-cli": "0.1.11",
-    "grunt-contrib-clean": "0.5.0",
     "grunt-contrib-connect": "0.7.1",
+    "grunt-contrib-copy": "1.0.0",
+    "grunt-contrib-cssmin": "1.0.1",
     "grunt-contrib-less": "0.11.0",
     "grunt-contrib-uglify": "0.4.0",
     "grunt-contrib-watch": "0.6.1",
-    "grunt-jshint2": "2.4.4",
     "grunt-remove": "0.1.0",
-    "grunt-simple-mocha": "0.4.0",
-    "jsdom": "^8.0.4",
+    "jscs": "3.0.5",
+    "jsdom": "8.0.4",
+    "jshint": "2.9.2",
     "mocha": "1.18.0",
     "sinon": "1.9.0"
   },
   "scripts": {
-    "test": "NODE_PATH=lib grunt test"
+    "prelint": "jscs lib/* test/* Gruntfile.js index.js",
+    "lint": "jshint lib/* test/* Gruntfile.js index.js",
+    "pretest": "npm run lint",
+    "test": "NODE_PATH=lib mocha test/"
   }
 }

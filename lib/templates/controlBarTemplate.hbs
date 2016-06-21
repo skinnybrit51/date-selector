@@ -1,0 +1,36 @@
+<div class="navigation-bar">
+
+    <div class="previous-buttons">
+        <div class="group-buttons">
+            {{#if showYearButtons}}
+                <button type="button" id="date-selector-prev-year" title="{{lang.previous_year}}">
+                    <span class="icon icon-previous-year"></span>
+                </button>
+            {{/if}}
+            <button type="button" id="date-selector-prev-month" title="{{lang.previous_month}}">
+                <span class="icon icon-previous-month"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="next-buttons">
+        <div class="group-buttons">
+            <button type="button" id="date-selector-today" title="{{lang.today}}">
+                <span class="icon icon-today"></span>
+            </button>
+            <button type="button" id="date-selector-next-month" title="{{lang.next_month}}">
+                <span class="icon icon-next-month"></span>
+            </button>
+            {{#if showYearButtons}}
+                <button type="button" id="date-selector-next-year" title="{{lang.next_year}}">
+                    <span class="icon icon-next-year"></span>
+                </button>
+            {{/if}}
+
+        </div>
+    </div>
+
+    <div class="month-text">
+        <span>{{month}}</span>
+    </div>
+</div>

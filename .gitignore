@@ -1,6 +1,14 @@
 node_modules/
 
-public/datepicker.js
-public/datepicker.css
+playground/dateSelector.js
+playground/dateSelector.css
+playground/dateSelector.min.js
+playground/dateSelector.min.css
+playground/fonts/
 
-dist/
+dist/dateSelector.js
+dist/dateSelector.css
+
+.idea/
+
+.DS_Store

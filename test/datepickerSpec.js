@@ -36,7 +36,6 @@ describe('Date Picker', function () {
         expect($('body').find('#date-selector').length).to.equal(0);
         this.launcher.trigger('click');
         expect($('body').find('#date-selector').length).to.equal(1);
-
     });
 
     it('Should close the picker', function () {
@@ -62,7 +61,7 @@ describe('Date Picker', function () {
         // hitting the escape key
         this.launcher.trigger('click');
         expect($('body').find('#date-selector').length).to.equal(1);
-        $(document).trigger($.Event('keyup', { keyCode: 27 }));
+        $(document).trigger($.Event('keyup', { keyCode : 27 }));
         expect($('body').find('#date-selector').length).to.equal(0);
     });
 
@@ -76,9 +75,11 @@ describe('Date Picker', function () {
     });
 
     it('Should format a date', function () {
-        datepicker({formatter: function (value) {
-            return moment(value).format('DD MMM YYYY');
-        }});
+        datepicker({
+            formatter : function (value) {
+                return moment(value).format('DD MMM YYYY');
+            }
+        });
 
         var date = moment().format('YYYY-MM-DD');
         this.launcher.trigger('click');
@@ -116,9 +117,11 @@ describe('Date Picker', function () {
 
     it('Should call the parser', function () {
         var parser = this.sandbox.spy();
-        datepicker({parser: parser, validate: function () {
-            return true;
-        }});
+        datepicker({
+            parser : parser, validate : function () {
+                return true;
+            }
+        });
         expect(parser.callCount).to.equal(0);
 
         this.input.val('2014-05-15');

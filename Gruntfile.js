@@ -1,129 +1,142 @@
+var browserifyHandlebars = require('browserify-handlebars');
+
 module.exports = function (grunt) {
     'use strict';
     grunt.initConfig({
-        pkg: grunt.file.readJSON('./package.json'),
-        browserify: {
-            dist: {
-                dest: './dist/datepicker.js',
-                src: ['./lib/datepicker.js'],
-                options: {
-                    bundleOptions: {
-                        standalone: 'DateSelector'       // global variable name
-                    }
-                }
-            },
-            local: {
-                src: './lib/demoLoader.js',
-                dest: './public/datepicker.js',
-                options: {
-                    bundleOptions: {
-                        debug: true //sourcemaps
-                    }
-                }
-            },
-            prod: {
-                src: './lib/demoLoader.js',
-                dest: './public/datepicker.js'
-            }
-        },
-        connect: {
-            server: {
-                options: {
-                    port: 8001,
-                    base: 'public'
+        pkg : grunt.file.readJSON('./package.json'),
+        connect : {
+            server : {
+                options : {
+                    port : 8001,
+                    base : 'playground'
                 }
             }
         },
-        simplemocha: {
-            options: {
-                timeout: 2000,
-                ui: 'bdd',
-                reporter: 'spec'
+        watch : {
+            less : {
+                files : './less/**/*.less',
+                tasks : ['less']
             },
-            all: {
-                src: ['test/**/*.js']
-            }
-        },
-        jshint2: {
-            options: {
-                jshintrc: '.jshintrc',
-                force: false,
-                cache: true,
-                reporter: 'default',
-                globals: {
-                    module: true,
-                    require: true,
-                    it: true,
-                    describe: true,
-                    beforeEach: true,
-                    afterEach: true,
-                    global: true,
-                    window: true,
-                    document: true
-                }
-            },
-            all: ['index.js', 'Gruntfile.js', 'test/**/*.js', 'lib/**/*.js']
-        },
-        watch: {
-            less: {
-                files: './less/**/*.less',
-                tasks: ['less']
-            },
-            app: {
-                files: './lib/**/*',
-                tasks: ['browserify:local']
+            app : {
+                files : './lib/**/*',
+                tasks : ['browserify:playground']
             }
 
         },
-        less: {
-            development: {
-                files: {
-                    'public/datepicker.css': 'less/datepicker.less'
+        browserify : {
+            dist : {
+                dest : './dist/dateSelector.min.js',
+                src : ['./lib/datepicker.js'],
+                options : {
+                    transform : [browserifyHandlebars],
+                    bundleOptions : {
+                        standalone : 'DateSelector'       // global variable name
+                    }
                 }
             },
-            production: {
-                options: {
-                    compact: true
+            playground : {
+                src : './lib/datepicker.js',
+                dest : './playground/dateSelector.min.js',
+                options : {
+                    transform : [browserifyHandlebars],
+                    bundleOptions : {
+                        standalone : 'DateSelector',       // global variable name
+                        debug : true //sourcemaps
+                    }
+                }
+            }
+        },
+        uglify : {
+            dist : {
+                files : {
+                    './dist/dateSelector.min.js' : ['./dist/dateSelector.min.js']
+                }
+            }
+        },
+        less : {
+            dist : {
+                options : {
+                    compact : true
                 },
-                files: {
-                    './dist/datepicker.min.css': 'less/datepicker.less'
+                files : {
+                    './dist/dateSelector.min.css' : './less/dateSelector.less'
                 }
             }
         },
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+        cssmin : {
+            dist : {
+                options : {
+                    banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                     '<%= grunt.template.today("yyyy-mm-dd") %> */'
-            },
-            production: {
-                files: {
-                    './dist/datepicker.min.js': ['./dist/datepicker.js']
+                },
+                files : {
+                    './dist/dateSelector.min.css' : './dist/dateSelector.min.css'
                 }
             }
         },
-        clean: {
-            js: ['./dist/*.js', '!./dist/*.min.js']
+        copy : {
+            playground : {
+                files : [
+                    {
+                        expand : true,
+                        src : './fonts/*',
+                        dest : './playground'
+                    },
+                    {
+                        expand : true,
+                        flatten : true,
+                        src : './dist/*',
+                        dest : './playground',
+                        filter : 'isFile'
+                    }
+                ]
+            }
+        },
+        usebanner : {
+            dist : {
+                options : {
+                    position : 'top',
+                    banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */',
+                    linebreak : true
+                },
+                files : {
+                    src : [
+                        './dist/dateSelector.min.js',
+                        './dist/dateSelector.min.css'
+                    ]
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-simple-mocha');
-    grunt.loadNpmTasks('grunt-jshint2');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-banner');
 
     // run development server for debugging
-    grunt.registerTask('default', ['browserify:local', 'less:development', 'connect', 'watch']);
-
-    // run unit tests
-    grunt.registerTask('test', ['simplemocha']);
-
-    // run file linter
-    grunt.registerTask('lint', ['jshint2']);
+    grunt.registerTask('default', [
+        'copy',
+        'browserify:playground',
+        'less:dist',
+        'cssmin:dist',
+        'usebanner:dist',
+        'copy:playground',
+        'connect',
+        'watch'
+    ]);
 
     // production build
-    grunt.registerTask('production', ['browserify:prod', 'less:development']);
+    grunt.registerTask('dist', [
+        'browserify:dist',
+        'uglify:dist',
+        'less:dist',
+        'cssmin:dist',
+        'usebanner:dist'
+    ]);
 };
