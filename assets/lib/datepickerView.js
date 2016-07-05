@@ -3,16 +3,24 @@ var $ = require('jquery'),
     navigationBarView = require('./navigationBarView'),
     tableView = require('./tableView');
 
-module.exports = function (options) {
+require('jquery-ui/position');
+
+module.exports = function (options, selectedDate, outputTarget) {
+
+    if (!moment.isMoment(selectedDate)) {
+
+        // just default today
+        selectedDate = moment();
+    }
 
     var el = $('<div id="date-selector"></div>');
 
-    var selectedMonth = options.selectedDate.clone().date(1);
+    var selectedMonth = selectedDate.clone().date(1);
 
     var refreshView = function () {
         el.empty();
         el.append(navigationBarView(selectedMonth, options).markup);
-        el.append(tableView(selectedMonth, options.selectedDate, options).markup);
+        el.append(tableView(selectedMonth, selectedDate, options).markup);
     };
 
     refreshView();
@@ -38,6 +46,28 @@ module.exports = function (options) {
         todaysMonth : function () {
             selectedMonth = moment();
             refreshView();
+        },
+        show : function (position, button) {
+            $(window.document.body).append(el);
+
+            // position = north, east, south, west
+            position = position || 'south';
+
+            switch (position.toLowerCase()) {
+                case 'north':
+                case 'south':
+                case 'east':
+                case 'west':
+                default:
+                {
+                    el.position({
+                        my : 'right bottom',
+                        at : 'right top',
+                        of : button
+                    });
+                }
+            }
+            el.show();
         }
     };
 
@@ -65,9 +95,18 @@ module.exports = function (options) {
     el.on('click', 'td:not(.not-current-month)', function () {
         var cell = $(this);
         var date = cell.attr('data-datepicker-date');
-        options.input.val(options.formatter(date));
         cell.trigger('date-selector-close');
-        options.input.trigger('blur');
+
+        if (outputTarget) {
+            if (outputTarget.is('input')) {
+                outputTarget.val(options.formatter(date));
+                outputTarget.trigger('blur');
+            } else {
+                outputTarget.text(options.formatter(date));
+            }
+
+        }
+
     });
 
     return api;

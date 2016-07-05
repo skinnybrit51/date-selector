@@ -5,28 +5,38 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg : grunt.file.readJSON('./package.json'),
         connect : {
-            server : {
+            demos : {
                 options : {
                     port : 8001,
+                    base : 'demos'
+                }
+            },
+            playground : {
+                options : {
+                    port : 8002,
                     base : 'playground'
                 }
             }
         },
         watch : {
             less : {
-                files : './less/**/*.less',
+                files : './assets/less/**/*.less',
                 tasks : ['less']
             },
-            app : {
-                files : './lib/**/*',
+            demos : {
+                files : ['./assets/demos/**/*'],
+                tasks : ['browserify:demos']
+            },
+            playground : {
+                files : ['./assets/lib/**/*'],
                 tasks : ['browserify:playground']
             }
 
         },
         browserify : {
             dist : {
+                src : ['./assets/lib/datepicker.js'],
                 dest : './dist/dateSelector.min.js',
-                src : ['./lib/datepicker.js'],
                 options : {
                     transform : [browserifyHandlebars],
                     bundleOptions : {
@@ -34,13 +44,22 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            playground : {
-                src : './lib/datepicker.js',
-                dest : './playground/dateSelector.min.js',
+            demos : {
+                src : './assets/demos/demoBootstrap.js',
+                dest : './demos/demoBootstrap.js',
                 options : {
                     transform : [browserifyHandlebars],
                     bundleOptions : {
-                        standalone : 'DateSelector',       // global variable name
+                        debug : true //sourcemaps
+                    }
+                }
+            },
+            playground : {
+                src : ['./assets/lib/playgroundBootstrap.js'],
+                dest : './playground/playground.js',
+                options : {
+                    transform : [browserifyHandlebars],
+                    bundleOptions : {
                         debug : true //sourcemaps
                     }
                 }
@@ -85,8 +104,24 @@ module.exports = function (grunt) {
                     {
                         expand : true,
                         flatten : true,
-                        src : './dist/*',
+                        src : './dist/*.css',
                         dest : './playground',
+                        filter : 'isFile'
+                    }
+                ]
+            },
+            demos : {
+                files : [
+                    {
+                        expand : true,
+                        src : './fonts/*',
+                        dest : './demos'
+                    },
+                    {
+                        expand : true,
+                        flatten : true,
+                        src : './dist/*',
+                        dest : './demos',
                         filter : 'isFile'
                     }
                 ]
@@ -119,15 +154,26 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-banner');
 
-    // run development server for debugging
-    grunt.registerTask('default', [
+    // playground
+    grunt.registerTask('playground', [
         'copy',
         'browserify:playground',
+        'less:dist',
+        'copy:playground',
+        'connect:playground',
+        'watch'
+    ]);
+
+    // demos
+    grunt.registerTask('demos', [
+        'copy',
+        'browserify:dist',
+        'browserify:demos',
         'less:dist',
         'cssmin:dist',
         'usebanner:dist',
         'copy:playground',
-        'connect',
+        'connect:demos',
         'watch'
     ]);
 

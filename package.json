@@ -13,10 +13,11 @@
     "url": "https://github.com/skinnybrit51/date-selector"
   },
   "dependencies": {
+    "handlebars": "4.0.5",
     "jquery": "2.2.0",
-    "moment": "2.13.0",
+    "jquery-ui": "^1.10.5",
     "lodash": "4.13.1",
-    "handlebars": "4.0.5"
+    "moment": "2.13.0"
   },
   "devDependencies": {
     "browserify-handlebars": "1.0.0",
@@ -40,9 +41,9 @@
     "sinon": "1.9.0"
   },
   "scripts": {
-    "prelint": "jscs lib/* test/* Gruntfile.js index.js",
-    "lint": "jshint lib/* test/* Gruntfile.js index.js",
+    "prelint": "jscs assets/lib/* assets/test/* Gruntfile.js index.js",
+    "lint": "jshint assets/lib/* assets/test/* Gruntfile.js index.js",
     "pretest": "npm run lint",
-    "test": "NODE_PATH=lib mocha test/"
+    "test": "NODE_PATH=assets/lib mocha test/"
   }
 }

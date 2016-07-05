@@ -16,6 +16,8 @@ module.exports = Object.freeze({
     INPUT_FORMATS : ['MM/DD/YYYY'],
     DISPLAY_FORMAT : 'MM/DD/YYYY',
     SELECTED_MONTH_FORMAT : 'MMMM YYYY',
+    position : 'south',
+    outputTarget : null,
     formatter : function (value) {
         return moment(value, this.RAW_FORMAT, true).format(this.DISPLAY_FORMAT);
     },

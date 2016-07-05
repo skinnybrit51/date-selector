@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>date-selector</title>
-<meta name="author" content="skinnybrit51">
-<meta name="description" content="date-selector playground page.">
-
+<title>date-selector - playground</title>
 <head>
     <!--jquery required by bootstrap-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -14,18 +11,25 @@
 
     <!--application-->
     <link rel="stylesheet" type="text/css" href="dateSelector.min.css"/>
-    <script type="application/javascript" src="dateSelector.min.js"></script>
+    <script type="application/javascript" src="playground.js"></script>
 
     <!--demo styles-->
     <link rel="stylesheet/less" type="text/css" href="index.less"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.0/less.min.js"></script>
-
 </head>
 <body>
 
 <div class="container">
 
-    <h1>date-selector demo</h1>
+    <h1>date-selector playground</h1>
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="date-input-demo1">Date:</label>
+            <input type="text" class="form-control" id="date-input-demo1" placeholder="<no date selected>" disabled>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="date-selector">Open Date Selector</button>
+    </form>
 
     <form role="form" class="form-horizontal">
 
@@ -68,7 +72,7 @@
     <pre>
 var $ = require('jquery'),
     moment = require('moment'),
-    dateSelector = require('date-selector');
+    datepicker = require('date-selector');
 
 $(function () {
 
@@ -87,15 +91,11 @@ $(function () {
             return moment(value, this.INPUT_FORMATS, true).format(this.RAW_FORMAT);
         }
     };
-    dateSelector(defaultOptions);
+    datepicker(defaultOptions);
 });
     </pre>
 
 </div>
-
-<script type="application/javascript">
-    DateSelector();
-</script>
 
 </body>
 </html>

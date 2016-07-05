@@ -1,14 +1,22 @@
 node_modules/
 
-playground/dateSelector.js
-playground/dateSelector.css
-playground/dateSelector.min.js
-playground/dateSelector.min.css
+demos/dateSelector.js
+demos/dateSelector.css
+demos/dateSelector.min.js
+demos/dateSelector.min.css
+demos/fonts/
+
 playground/fonts/
+playground/dateSelector.min.css
+playground/playground.js
 
 dist/dateSelector.js
+dist/dateSelector.min.js
 dist/dateSelector.css
+dist/dateSelector.min.css
 
 .idea/
 
 .DS_Store
+
+*.log
